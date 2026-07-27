@@ -1,6 +1,6 @@
 """
 Interfaz web del Agente BimBam Buy.
-Estilo: Cálido, hogareño y amigable.
+Estilo: Cálido y hogareño con animaciones sutiles.
 """
 import streamlit as st
 from src.agente import AgenteBimBam
@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-# --- CSS Cálido y Hogareño ---
+# --- CSS Cálido con Animaciones Sutiles ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
@@ -23,8 +23,16 @@ st.markdown("""
         font-family: 'Nunito', sans-serif !important;
     }
     
+    /* Fondo con gradiente muy suave que respira lentamente */
     .stApp { 
-        background-color: #FFF8F0;
+        background: linear-gradient(160deg, #FFF8F0 0%, #FFF1E6 30%, #F0F7F4 70%, #FFF8F0 100%);
+        background-size: 200% 200%;
+        animation: breathe 20s ease-in-out infinite;
+    }
+    
+    @keyframes breathe {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     
     .main .block-container {
@@ -32,13 +40,19 @@ st.markdown("""
         max-width: 800px !important;
     }
     
-    /* Título sencillo y cálido */
+    /* Título con aparición suave */
     h1 {
         color: #E07A5F !important;
         font-weight: 800 !important;
         font-size: 2.5rem !important;
         text-align: center;
         margin-bottom: 0;
+        animation: fadeDown 0.8s ease-out;
+    }
+    
+    @keyframes fadeDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     
     .subtitle {
@@ -47,9 +61,10 @@ st.markdown("""
         font-weight: 600;
         font-size: 1.1rem;
         margin-bottom: 2rem;
+        animation: fadeDown 1s ease-out;
     }
     
-    /* Cajas de chat suaves y redondeadas */
+    /* Cajas de chat con entrada suave */
     .stChatMessage {
         border-radius: 16px;
         padding: 1.2rem;
@@ -57,6 +72,18 @@ st.markdown("""
         background: #FFFFFF !important;
         border: 1px solid #F2E9DE;
         box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        animation: slideIn 0.4s ease-out;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    
+    .stChatMessage:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+        transform: translateY(-1px);
+    }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     
     /* Texto legible y cálido */
@@ -66,19 +93,29 @@ st.markdown("""
         line-height: 1.6; 
     }
     
-    /* Input redondeado y amigable */
+    /* Input con transición suave al enfocar */
     [data-testid="stChatInput"] {
         border-radius: 24px !important;
         border: 2px solid #F2E9DE !important;
         background: #FFFFFF !important;
         box-shadow: 0 2px 10px rgba(0,0,0,0.04) !important;
+        transition: all 0.4s ease !important;
     }
     
     [data-testid="stChatInput"]:focus-within {
         border-color: #E07A5F !important;
-        box-shadow: 0 4px 12px rgba(224, 122, 95, 0.15) !important;
+        box-shadow: 0 4px 18px rgba(224, 122, 95, 0.12) !important;
+        transform: translateY(-1px);
     }
     
+    /* Botón sidebar con hover elegante */
+    .stButton > button {
+        transition: all 0.3s ease !important;
+    }
+    .stButton > button:hover {
+        transform: translateY(-1px) !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
