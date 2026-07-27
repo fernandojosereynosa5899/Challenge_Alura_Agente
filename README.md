@@ -125,12 +125,6 @@ BimBam Buy acepta los siguientes métodos de pago: Tarjeta de crédito, Tarjeta 
 **Servicio desplegado exitosamente en Render:**
 ![Enlace Render](img/render.png)
 
-## 🏆 Logros y Certificaciones
-
-- 🏅 **Badge:** RAG Agente IA (¡Obtenido!)
-- 📄 [**Certificado de Finalización (Diseño Original)**](img/Certificado.pdf)
-- 📄 [**Certificado de Finalización (Diseño Formal)**](img/Certificado_Formal.pdf)
-
 ---
 *Desarrollado para el Challenge Alura Agente - ONE*
 
