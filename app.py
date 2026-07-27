@@ -9,124 +9,129 @@ import os
 
 # --- Configuración de la página ---
 st.set_page_config(
-    page_title="BimBam Buy | IA",
+    page_title="BimBam Buy | Asistente IA",
     page_icon="✨",
     layout="centered",
-    initial_sidebar_state="auto"
+    initial_sidebar_state="expanded"
 )
 
-# --- CSS Ultra Premium, Responsivo y Vibrante ---
+# --- CSS Ultra Premium Final ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Outfit', sans-serif !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
     
-    /* Contenedor principal con efecto de desenfoque de fondo */
+    /* Fondo limpio y muy moderno */
     .stApp { 
-        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        background-color: #FAFAFB;
+        background-image: radial-gradient(at 8% 13%, hsla(253,88%,79%,0.15) 0px, transparent 50%),
+                          radial-gradient(at 89% 82%, hsla(334,91%,79%,0.12) 0px, transparent 50%);
+        background-attachment: fixed;
     }
     
-    /* Título Impresionante con Gradiente Dinámico */
-    h1 {
-        background: linear-gradient(-45deg, #8B5CF6, #EC4899, #F43F5E, #8B5CF6);
-        background-size: 300% 300%;
-        animation: gradientBG 5s ease infinite;
+    /* Título Impresionante */
+    .titulo-principal {
+        background: linear-gradient(135deg, #4F46E5 0%, #D946EF 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 800 !important;
-        font-size: 3rem !important;
+        font-size: 3.5rem !important;
         text-align: center;
-        margin-bottom: -10px;
+        margin-bottom: 0px;
+        line-height: 1.2;
     }
     
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    /* Contenedor responsivo */
-    .main .block-container {
-        padding: 2rem 1rem !important;
-        max-width: 900px !important;
-    }
-    
-    /* Globos de Chat Estilo iMessage/Glassmorphism */
-    .stChatMessage {
-        border-radius: 20px;
-        padding: 1.5rem;
-        margin-bottom: 1.2rem;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-        animation: slideUp 0.4s ease-out forwards;
-        background: rgba(255, 255, 255, 0.85);
-    }
-    
-    /* Diferenciar el globo del usuario del bot */
-    [data-testid="stChatMessage"]:nth-child(even) {
-        background: linear-gradient(135deg, #F3E8FF, #FCE7F3);
-        border: 1px solid #FBCFE8;
-    }
-    
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px) scale(0.98); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    
-    /* Etiquetas de Fuentes (Píldoras de colores vibrantes) */
-    .fuente-tag {
-        background: linear-gradient(90deg, #6366F1, #8B5CF6);
-        color: white;
-        padding: 6px 14px;
-        border-radius: 50px;
-        font-size: 0.8rem;
+    .subtitulo {
+        text-align: center;
+        color: #64748B;
         font-weight: 500;
-        margin: 4px;
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    /* Contenedor central ajustado */
+    .main .block-container {
+        padding: 3rem 1.5rem !important;
+        max-width: 850px !important;
+    }
+    
+    /* Estilos de las cajas de Chat */
+    .stChatMessage {
+        border-radius: 16px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        background: white;
+    }
+    
+    /* Mensajes del Bot */
+    [data-testid="stChatMessage"]:nth-child(odd) {
+        background: linear-gradient(145deg, #ffffff, #f8faff);
+        border-left: 4px solid #8B5CF6;
+    }
+    
+    /* Mensajes del Usuario */
+    [data-testid="stChatMessage"]:nth-child(even) {
+        background: linear-gradient(145deg, #F3E8FF, #FaF5FF);
+        border-right: 4px solid #D946EF;
+    }
+    
+    @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.97) translateY(10px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    /* Etiquetas de Fuentes Premium */
+    .fuente-tag {
+        background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin: 4px 4px 4px 0;
         display: inline-flex;
         align-items: center;
-        box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
-        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+        transition: transform 0.2s;
     }
-    
     .fuente-tag:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 15px rgba(139, 92, 246, 0.5);
+        transform: translateY(-2px);
     }
     
-    /* Input de Chat Elevado y Responsivo */
+    /* Input de Chat Flotante */
     [data-testid="stChatInput"] {
-        border-radius: 30px !important;
-        border: 2px solid #E2E8F0 !important;
-        background: rgba(255, 255, 255, 0.9) !important;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important;
-        padding: 0.2rem 1rem !important;
+        border-radius: 20px !important;
+        border: 1px solid #E2E8F0 !important;
+        background: white !important;
+        box-shadow: 0 10px 25px rgba(139, 92, 246, 0.08) !important;
+        padding: 0.3rem 0.5rem !important;
     }
     
     [data-testid="stChatInput"]:focus-within {
         border-color: #8B5CF6 !important;
-        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2) !important;
+        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15) !important;
     }
-
-    /* Media Queries para Responsividad (Celulares) */
-    @media (max-width: 768px) {
-        h1 { font-size: 2.2rem !important; }
-        .stChatMessage { padding: 1rem; }
-        .fuente-tag { font-size: 0.75rem; padding: 5px 10px; }
-    }
+    
+    /* Ajustes visuales para Markdown */
+    .stMarkdown p { font-size: 1.05rem; color: #334155; line-height: 1.6; }
+    .stMarkdown h3 { color: #1E293B; }
+    
 </style>
 """, unsafe_allow_html=True)
 
 # --- Encabezado ---
-st.markdown("<h1>✨ BimBam Buy AI</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #64748B; font-size: 1.1rem; margin-bottom: 2rem;'>Tu Asistente Corporativo Inteligente</p>", unsafe_allow_html=True)
+st.markdown("<h1 class='titulo-principal'>BimBam Buy AI</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitulo'>Tu Copiloto Corporativo Inteligente ✨</p>", unsafe_allow_html=True)
 
 # --- Inicialización del Agente ---
-@st.cache_resource(show_spinner="Despertando a la IA...")
+@st.cache_resource(show_spinner="Preparando el cerebro del asistente...")
 def inicializar_agente():
     if not os.path.exists("chroma_db"):
         st.info("Sincronizando conocimientos. Esto tomará unos segundos...")
@@ -138,17 +143,21 @@ agente = inicializar_agente()
 # --- Gestión del Historial de Chat ---
 if "mensajes" not in st.session_state:
     st.session_state.mensajes = [
-        {"role": "assistant", "content": "¡Hola! 👋 Soy tu copiloto en BimBam Buy. Conozco a la perfección todas nuestras **Políticas de Envíos, Garantías, Reembolsos, Pagos y Afiliados**.\n\n¿Qué duda tienes hoy?"}
+        {
+            "role": "assistant", 
+            "content": "**¡Hola! 👋** Bienvenido a la base de conocimiento de BimBam Buy.\n\nEstoy entrenado para responder cualquier duda sobre nuestras **Políticas de Envíos, Garantías, Reembolsos, Pagos y el Programa de Afiliados**.\n\n*¿En qué te puedo ayudar hoy?*",
+            "avatar": "✨"
+        }
     ]
 
 # Mostrar los mensajes anteriores
 for mensaje in st.session_state.mensajes:
-    with st.chat_message(mensaje["role"]):
+    avatar = mensaje.get("avatar", "🧑‍💻" if mensaje["role"] == "user" else "✨")
+    with st.chat_message(mensaje["role"], avatar=avatar):
         st.markdown(mensaje["content"])
         if "fuentes" in mensaje and mensaje["fuentes"]:
-            st.markdown("<br><span style='color: #64748B; font-size: 0.85rem;'>📚 F U E N T E S :</span><br>", unsafe_allow_html=True)
+            st.markdown("<br><span style='color: #94A3B8; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;'>FUENTES OFICIALES:</span><br>", unsafe_allow_html=True)
             for fuente in mensaje["fuentes"]:
-                # Formatear el nombre del PDF para que se vea más limpio
                 nombre_limpio = fuente.replace('_', ' ').replace('.pdf', '')
                 st.markdown(f"<span class='fuente-tag'>📄 {nombre_limpio}</span>", unsafe_allow_html=True)
 
@@ -157,14 +166,13 @@ pregunta_usuario = st.chat_input("Escribe tu consulta aquí...")
 
 if pregunta_usuario:
     # 1. Mostrar la pregunta del usuario
-    with st.chat_message("user"):
+    st.session_state.mensajes.append({"role": "user", "content": pregunta_usuario, "avatar": "🧑‍💻"})
+    with st.chat_message("user", avatar="🧑‍💻"):
         st.markdown(pregunta_usuario)
     
-    st.session_state.mensajes.append({"role": "user", "content": pregunta_usuario})
-    
     # 2. Generar y mostrar la respuesta
-    with st.chat_message("assistant"):
-        with st.spinner("Analizando la matriz de documentos..."):
+    with st.chat_message("assistant", avatar="✨"):
+        with st.spinner("Consultando los manuales corporativos..."):
             resultado = agente.preguntar(pregunta_usuario)
             
             respuesta_texto = resultado["respuesta"]
@@ -173,7 +181,7 @@ if pregunta_usuario:
             st.markdown(respuesta_texto)
             
             if fuentes:
-                st.markdown("<br><span style='color: #64748B; font-size: 0.85rem;'>📚 F U E N T E S :</span><br>", unsafe_allow_html=True)
+                st.markdown("<br><span style='color: #94A3B8; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;'>FUENTES OFICIALES:</span><br>", unsafe_allow_html=True)
                 for fuente in fuentes:
                     nombre_limpio = fuente.replace('_', ' ').replace('.pdf', '')
                     st.markdown(f"<span class='fuente-tag'>📄 {nombre_limpio}</span>", unsafe_allow_html=True)
@@ -182,31 +190,34 @@ if pregunta_usuario:
     st.session_state.mensajes.append({
         "role": "assistant", 
         "content": respuesta_texto,
-        "fuentes": fuentes
+        "fuentes": fuentes,
+        "avatar": "✨"
     })
 
-# --- Barra Lateral (Sidebar) Responsiva ---
+# --- Barra Lateral (Sidebar) ---
 with st.sidebar:
     st.markdown("### ⚙️ Panel de Control")
     st.markdown("""
     Este asistente utiliza **Inteligencia Artificial (RAG)**.  
-    Toda respuesta está respaldada estrictamente por la documentación de la empresa.
+    Toda respuesta está respaldada estrictamente por la documentación oficial.
     """)
     
     st.divider()
     
-    st.markdown("#### 📖 Archivos Base:")
-    st.caption("✔️ Envíos y Logística")
-    st.caption("✔️ Cobertura de Garantías")
-    st.caption("✔️ Devoluciones")
-    st.caption("✔️ Medios de Pago")
-    st.caption("✔️ Afiliados")
+    st.markdown("#### 📖 Módulos Indexados:")
+    st.markdown("""
+    - 📦 Tiempos y Costos de Envío
+    - 🛡️ Manual de Garantía
+    - 💸 Reembolsos y Devoluciones
+    - 💳 FAQ de Métodos de Pago
+    - 🤝 Programa de Afiliados
+    """)
     
     st.divider()
     
-    if st.button("🗑️ Borrar Historial", type="primary", use_container_width=True):
+    if st.button("🔄 Reiniciar Sesión", type="primary", use_container_width=True):
         st.session_state.mensajes = [
-            {"role": "assistant", "content": "¡Memoria borrada! Comenzamos de nuevo. ✨"}
+            {"role": "assistant", "content": "¡Memoria borrada! Comenzamos de nuevo. ✨", "avatar": "✨"}
         ]
         agente.reiniciar_conversacion()
         st.rerun()
