@@ -24,3 +24,10 @@ __pycache__/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Archivos de datos locales
+documentacion.txt
+*.json
+
+# Base de datos vectorial (se genera automáticamente)
+chroma_db/
