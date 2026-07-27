@@ -82,14 +82,22 @@ En un par de minutos, tendrás un enlace público a tu agente.
 **Pregunta 1:**  
 *¿Cuánto tarda un envío estándar?*  
 **Respuesta:**  
-Un envío estándar tarda entre 2 a 5 días hábiles en zonas urbanas principales, entre 4 a 8 días hábiles en zonas secundarias y entre 6 a 12 días hábiles en zonas de cobertura extendida...
+Un envío estándar tarda entre 2 a 5 días hábiles en zonas urbanas principales, entre 4 a 8 días hábiles en zonas secundarias y entre 6 a 12 días hábiles en zonas de cobertura extendida.
 **📄 Fuente(s):** `Guía_de_Tiempos_y_Costos_de_Envío_de_BimBam_Buy.pdf`
+
+💡 **Preguntas sugeridas:**
+- ¿Qué pasa si el pedido se retrasa?
+- ¿Existen envíos exprés?
 
 **Pregunta 2:**  
 *¿Qué métodos de pago aceptan?*  
 **Respuesta:**  
 BimBam Buy acepta los siguientes métodos de pago: Tarjeta de crédito, Tarjeta de débito, Transferencia bancaria, Pago en efectivo en puntos habilitados, y Billeteras digitales.
 **📄 Fuente(s):** `Preguntas_Frecuentes_sobre_Métodos_de_Pago_de_BimBam_Buy.pdf`
+
+💡 **Preguntas sugeridas:**
+- ¿Es seguro pagar con tarjeta en BimBam Buy?
+- ¿Puedo pagar a meses sin intereses?
 
 ## 📸 Evidencia de Ejecución
 *(Reemplaza este bloque con un enlace, captura de pantalla o GIF de tu aplicación funcionando en la nube cuando termines el paso de Deploy)*
