@@ -35,7 +35,7 @@ El sistema sigue un pipeline RAG clásico, compuesto por dos fases principales:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone <URL_DE_TU_REPOSITORIO>
+   git clone <https://github.com/fernandojosereynosa5899/Challenge_Alura_Agente.git>
    cd Challenge_Alura_Agente
    ```
 
