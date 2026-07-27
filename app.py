@@ -12,91 +12,143 @@ import os
 
 # --- Configuración de la página ---
 st.set_page_config(
-    page_title="🛒 Asistente BimBam Buy",
-    page_icon="🤖",
+    page_title="BimBam Buy | IA",
+    page_icon="🛍️",
     layout="centered",
+    initial_sidebar_state="expanded"
 )
 
-# --- CSS Personalizado ---
+# --- CSS Premium y Animaciones ---
 st.markdown("""
 <style>
-    /* Estilos para que se vea más limpio */
-    .stApp { max-width: 900px; margin: 0 auto; }
+    /* Tipografía y espaciado general */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Contenedor principal */
+    .stApp { 
+        max-width: 900px; 
+        margin: 0 auto; 
+    }
+    
+    /* Títulos con gradiente */
+    h1 {
+        background: linear-gradient(90deg, #2A62C9, #10B981);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800 !important;
+        letter-spacing: -1px;
+    }
+    
+    /* Tarjetas de fuentes (Source Tags) con efecto Hover */
     .fuente-tag {
-        background-color: #e8f4fd;
-        padding: 4px 8px;
-        border-radius: 4px;
+        background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+        color: #1E3A8A;
+        padding: 6px 12px;
+        border-radius: 20px;
         font-size: 0.85em;
-        margin: 2px;
+        font-weight: 600;
+        margin: 4px;
         display: inline-block;
-        border: 1px solid #b3d4fc;
+        border: 1px solid #BFDBFE;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .fuente-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+    }
+    
+    /* Globos de chat con Glassmorphism suave */
+    .stChatMessage {
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Input de chat mejorado */
+    [data-testid="stChatInput"] {
+        border-radius: 24px !important;
+        border: 2px solid #E2E8F0 !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    [data-testid="stChatInput"]:focus-within {
+        border-color: #2A62C9 !important;
+        box-shadow: 0 4px 15px rgba(42, 98, 201, 0.15) !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # --- Encabezado ---
-st.title("🛒 BimBam Buy")
-st.subheader("🤖 Asistente IA para Colaboradores")
+st.title("🛍️ BimBam Buy")
+st.markdown("### ✨ Asistente Inteligente Corporativo")
 st.markdown("---")
 
 # --- Inicialización del Agente ---
-# Usamos st.cache_resource para que el agente se cargue solo una vez
-@st.cache_resource(show_spinner="Inicializando base de conocimiento...")
+@st.cache_resource(show_spinner="Configurando tu asistente virtual...")
 def inicializar_agente():
-    # Verificamos si existe la base de datos, si no, la creamos (indexación automática)
     if not os.path.exists("chroma_db"):
-        st.info("Primera ejecución detectada. Indexando documentos...")
+        st.info("Primera ejecución detectada. Indexando documentos oficiales...")
         ejecutar_indexacion()
     return AgenteBimBam()
 
-# Cargamos el agente
 agente = inicializar_agente()
 
 # --- Gestión del Historial de Chat ---
 if "mensajes" not in st.session_state:
     st.session_state.mensajes = [
-        {"role": "assistant", "content": "¡Hola! Soy el asistente virtual de BimBam Buy. ¿En qué te puedo ayudar hoy con respecto a nuestras políticas y documentos?"}
+        {"role": "assistant", "content": "¡Hola! 👋 Soy la Inteligencia Artificial de BimBam Buy. Estoy entrenado con nuestras políticas de Envíos, Garantías, Reembolsos, Pagos y Afiliados. **¿En qué te puedo ayudar hoy?**"}
     ]
 
 # Mostrar los mensajes anteriores
 for mensaje in st.session_state.mensajes:
     with st.chat_message(mensaje["role"]):
         st.markdown(mensaje["content"])
-        # Mostrar fuentes si existen
         if "fuentes" in mensaje and mensaje["fuentes"]:
-            st.markdown("**📄 Fuentes:**")
+            st.markdown("<br>**📚 Fuentes oficiales consultadas:**", unsafe_allow_html=True)
             for fuente in mensaje["fuentes"]:
-                st.markdown(f"<span class='fuente-tag'>{fuente}</span>", unsafe_allow_html=True)
+                st.markdown(f"<span class='fuente-tag'>📄 {fuente}</span>", unsafe_allow_html=True)
 
 # --- Entrada de Usuario ---
-pregunta_usuario = st.chat_input("Escribe tu pregunta sobre BimBam Buy aquí...")
+pregunta_usuario = st.chat_input("Ej: ¿Cuál es el proceso para tramitar una garantía?")
 
 if pregunta_usuario:
-    # 1. Mostrar la pregunta del usuario en la UI
+    # 1. Mostrar la pregunta del usuario
     with st.chat_message("user"):
         st.markdown(pregunta_usuario)
     
-    # 2. Guardar en el historial (sesión de Streamlit)
     st.session_state.mensajes.append({"role": "user", "content": pregunta_usuario})
     
-    # 3. Generar y mostrar la respuesta del agente
+    # 2. Generar y mostrar la respuesta
     with st.chat_message("assistant"):
-        with st.spinner("Buscando en los documentos..."):
+        with st.spinner("Analizando manuales corporativos..."):
             resultado = agente.preguntar(pregunta_usuario)
             
             respuesta_texto = resultado["respuesta"]
             fuentes = resultado["fuentes"]
             
-            # Mostrar la respuesta
             st.markdown(respuesta_texto)
             
-            # Mostrar fuentes
             if fuentes:
-                st.markdown("**📄 Fuentes consultadas:**")
+                st.markdown("<br>**📚 Fuentes oficiales consultadas:**", unsafe_allow_html=True)
                 for fuente in fuentes:
-                    st.markdown(f"<span class='fuente-tag'>{fuente}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span class='fuente-tag'>📄 {fuente}</span>", unsafe_allow_html=True)
             
-    # 4. Guardar la respuesta en el historial
+    # 3. Guardar en historial
     st.session_state.mensajes.append({
         "role": "assistant", 
         "content": respuesta_texto,
@@ -105,29 +157,31 @@ if pregunta_usuario:
 
 # --- Barra Lateral (Sidebar) ---
 with st.sidebar:
-    st.header("ℹ️ Información")
+    st.image("https://img.icons8.com/color/96/000000/online-store.png", width=60)
+    st.header("Centro de Conocimiento")
     st.markdown("""
-    Este asistente utiliza Inteligencia Artificial (RAG) para responder 
-    preguntas basándose **únicamente** en los documentos internos de BimBam Buy.
-    """)
-    
-    st.subheader("📚 Documentos disponibles:")
-    st.markdown("""
-    - Guía de Envíos
-    - Manual de Garantía
-    - Política de Reembolsos
-    - FAQ de Métodos de Pago
-    - Programa de Afiliados
+    Este asistente utiliza tecnología **RAG de vanguardia** para responder 
+    preguntas basándose **únicamente** en los documentos internos oficiales de la empresa.
     """)
     
     st.divider()
     
-    st.caption("⚠️ Estás conversando con una IA.")
+    st.subheader("📑 Políticas Indexadas:")
+    st.markdown("""
+    - 📦 Tiempos y Costos de Envío
+    - 🛡️ Manual de Garantía
+    - 💸 Reembolsos y Devoluciones
+    - 💳 FAQ de Métodos de Pago
+    - 🤝 Programa de Afiliados
+    """)
     
-    # Botón para limpiar el chat
-    if st.button("🔄 Nueva conversación", type="primary"):
+    st.divider()
+    
+    if st.button("✨ Reiniciar Sesión", type="primary", use_container_width=True):
         st.session_state.mensajes = [
-            {"role": "assistant", "content": "¡Hola! He reiniciado nuestra conversación. ¿En qué te ayudo?"}
+            {"role": "assistant", "content": "¡Conversación reiniciada! 👋 ¿En qué más te puedo asistir?"}
         ]
         agente.reiniciar_conversacion()
         st.rerun()
+    
+    st.caption("🔒 Respuestas protegidas y basadas 100% en documentación interna. No incluye información de internet.")
