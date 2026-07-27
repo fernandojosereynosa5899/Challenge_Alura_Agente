@@ -1,5 +1,9 @@
 # 🛒 BimBam Buy — Agente IA Corporativo
 
+<div align="center">
+  <img src="img/badge-rag-agente-ia.png" alt="Badge RAG Agente IA" width="150" />
+</div>
+
 ¡Bienvenido al repositorio del Agente de Inteligencia Artificial para **BimBam Buy**! 
 Este proyecto es la solución al **Challenge Alura Agente - ONE IA FOR TECH**.
 
@@ -121,5 +125,18 @@ BimBam Buy acepta los siguientes métodos de pago: Tarjeta de crédito, Tarjeta 
 **Servicio desplegado exitosamente en Render:**
 ![Enlace Render](img/render.png)
 
+## 🏆 Logros y Certificaciones
+
+- 🏅 **Badge:** RAG Agente IA (¡Obtenido!)
+- 📄 [**Certificado de Finalización (Diseño Original)**](img/Certificado.pdf)
+- 📄 [**Certificado de Finalización (Diseño Formal)**](img/Certificado_Formal.pdf)
+
 ---
 *Desarrollado para el Challenge Alura Agente - ONE*
+
+
+Actualización comparto mi badge obtenida por el Challenge
+![Badge](..img/badge-rag-agente-ia.png)
+
+Certificado obtenido por el Challenge
+![Certificado](..img/certificado-rag-agente-ia.png)
