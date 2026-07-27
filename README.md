@@ -127,10 +127,3 @@ BimBam Buy acepta los siguientes métodos de pago: Tarjeta de crédito, Tarjeta 
 
 ---
 *Desarrollado para el Challenge Alura Agente - ONE*
-
-
-Actualización comparto mi badge obtenida por el Challenge
-![Badge](..img/badge-rag-agente-ia.png)
-
-Certificado obtenido por el Challenge
-![Certificado](..img/certificado-rag-agente-ia.png)
