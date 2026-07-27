@@ -3,7 +3,7 @@
 ¡Bienvenido al repositorio del Agente de Inteligencia Artificial para **BimBam Buy**! 
 Este proyecto es la solución al **Challenge Alura Agente - ONE IA FOR TECH**.
 
-![Demostración de la Interfaz](demo_interfaz.gif)
+![Demostración de la Interfaz](gift/demostracion_uso.gif)
 
 ## 📋 Descripción del Proyecto
 Este proyecto implementa un agente corporativo basado en Inteligencia Artificial capaz de responder preguntas de los colaboradores de la empresa ficticia **BimBam Buy**. 
@@ -37,8 +37,6 @@ graph TD
    - La base vectorial busca los fragmentos más relevantes a la consulta.
    - Se inyecta la consulta y el contexto en el LLM (`gpt-4o-mini` de OpenAI).
    - El modelo formula una respuesta natural. Para mantener una estética limpia y corporativa, las fuentes no se muestran explícitamente en la UI, pero el agente sugiere preguntas de seguimiento (Follow-ups).
-
-![Arquitectura RAG](arquitectura_rag.png)
 
 ## 🛠️ Tecnologías y Herramientas
 - **Lenguaje:** Python 3.11+
@@ -105,8 +103,6 @@ Un envío estándar tarda entre 2 a 5 días hábiles en zonas urbanas principale
 - ¿Qué pasa si el pedido se retrasa?
 - ¿Existen envíos exprés?
 
-![Ejemplo de Respuesta Envío](ejemplo_envio.png)
-
 **Pregunta 2:**  
 *¿Qué métodos de pago aceptan?*  
 **Respuesta:**  
@@ -116,12 +112,13 @@ BimBam Buy acepta los siguientes métodos de pago: Tarjeta de crédito, Tarjeta 
 - ¿Es seguro pagar con tarjeta en BimBam Buy?
 - ¿Puedo pagar a meses sin intereses?
 
-![Ejemplo de Respuesta Pago](ejemplo_pago.png)
-
 ## 📸 Evidencia de Ejecución
-*(Reemplaza este bloque con un enlace a tu aplicación funcionando en la nube cuando termines el paso de Deploy)*
 
-![Evidencia Deploy Render](deploy_render.png)
+**Agente en funcionamiento:**
+![Aplicación Corriendo](img/render_corriendo.png)
+
+**Servicio desplegado exitosamente en Render:**
+![Enlace Render](img/render.png)
 
 ---
 *Desarrollado para el Challenge Alura Agente - ONE*
