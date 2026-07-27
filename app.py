@@ -1,6 +1,6 @@
 """
 Interfaz web del Agente BimBam Buy.
-Estilo: TRUE LIQUID CRYSTAL (Animado, Holográfico, Glassmorphism Extremo)
+Estilo: NEO LIQUID CRYSTAL (Futurista, Dark Neon, Tipografías Sci-Fi)
 """
 import streamlit as st
 from src.agente import AgenteBimBam
@@ -8,154 +8,173 @@ from src.indexador import ejecutar_indexacion
 import os
 
 st.set_page_config(
-    page_title="BimBam Buy | IA",
-    page_icon="💎",
+    page_title="BimBam Buy | NEON",
+    page_icon="🌌",
     layout="centered",
     initial_sidebar_state="auto"
 )
 
-# --- CSS TRUE LIQUID CRYSTAL ---
+# --- CSS NEO LIQUID CRYSTAL ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap');
+    /* Tipografías Futuristas */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Outfit', sans-serif !important;
-        color: #1a1a2e !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        color: #E0E0FF !important;
     }
     
-    /* Fondo Fluido Animado (True Liquid Holographic) */
+    h1, h2, h3, .subtitle {
+        font-family: 'Orbitron', sans-serif !important;
+    }
+    
+    /* Fondo Fluido Oscuro de Neón */
     .stApp { 
-        background: linear-gradient(125deg, #a1c4fd 0%, #c2e9fb 25%, #e0c3fc 50%, #8ec5fc 75%, #ffb199 100%);
+        background: linear-gradient(-45deg, #0f0c29, #302b63, #0b8793, #360033);
         background-size: 400% 400%;
-        animation: liquidFlow 15s ease infinite;
+        animation: neonLiquid 12s ease infinite;
         background-attachment: fixed;
     }
     
-    @keyframes liquidFlow {
+    @keyframes neonLiquid {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
     
-    /* Contenedor central ajustado */
+    /* Contenedor central */
     .main .block-container {
         padding: 3rem 1.5rem !important;
         max-width: 850px !important;
     }
     
-    /* Título Cromado/Cristalino */
+    /* Título Futurista Cromado Neón */
     h1 {
-        background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 40%, #cccccc 100%);
+        background: linear-gradient(90deg, #00F0FF, #7000FF, #FF003C);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        font-weight: 800 !important;
-        font-size: 4rem !important;
+        font-weight: 900 !important;
+        font-size: 3.8rem !important;
         text-align: center;
-        letter-spacing: -2px;
+        letter-spacing: 2px;
         margin-bottom: 0px;
-        filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15));
+        animation: shine 5s linear infinite;
+        filter: drop-shadow(0px 0px 15px rgba(0, 240, 255, 0.4));
+    }
+    
+    @keyframes shine {
+        to { background-position: 200% center; }
     }
     
     .subtitle {
         text-align: center;
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 1.4rem;
-        letter-spacing: 2px;
+        color: #00F0FF;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: 6px;
         text-transform: uppercase;
-        margin-bottom: 3rem;
-        text-shadow: 0 2px 10px rgba(255,255,255,0.5);
+        margin-bottom: 3.5rem;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
     }
     
-    /* GLOBOS DE CHAT - EFECTO CRISTAL PURO */
+    /* GLOBOS DE CHAT - CRISTAL OSCURO ILUMINADO */
     .stChatMessage {
-        border-radius: 24px;
+        border-radius: 16px;
         padding: 1.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.8rem;
         
-        /* Glassmorphism Hiper-Realista */
-        background: rgba(255, 255, 255, 0.25) !important;
-        backdrop-filter: blur(25px) saturate(150%) contrast(120%) !important;
-        -webkit-backdrop-filter: blur(25px) saturate(150%) contrast(120%) !important;
+        /* Dark Glassmorphism */
+        background: rgba(10, 10, 25, 0.45) !important;
+        backdrop-filter: blur(25px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
         
-        /* Reflejos de cristal (Bordes superior e izquierdo más brillantes) */
-        border-top: 1px solid rgba(255, 255, 255, 0.8) !important;
-        border-left: 1px solid rgba(255, 255, 255, 0.6) !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        /* Reflejos Sci-Fi */
+        border-top: 1px solid rgba(0, 240, 255, 0.4) !important;
+        border-bottom: 1px solid rgba(255, 0, 60, 0.2) !important;
         
-        /* Sombra interior y exterior para profundidad 3D */
         box-shadow: 
-            0 12px 32px 0 rgba(31, 38, 135, 0.15),
-            inset 0 0 20px rgba(255, 255, 255, 0.5) !important;
+            0 15px 35px rgba(0, 0, 0, 0.5),
+            inset 0 0 20px rgba(112, 0, 255, 0.1) !important;
         
-        animation: levitateIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        animation: dataDrop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
     
-    /* Distinción Bot vs Usuario con tonalidades sutiles */
+    /* Bot = Bordes Neón Azul/Morado */
     [data-testid="stChatMessage"]:nth-child(odd) {
-        background: rgba(240, 248, 255, 0.35) !important; /* Ligeramente azul para bot */
+        border-left: 2px solid #00F0FF !important;
+        border-right: 1px solid rgba(255,255,255,0.05) !important;
     }
+    
+    /* Usuario = Bordes Neón Magenta */
     [data-testid="stChatMessage"]:nth-child(even) {
-        background: rgba(255, 240, 245, 0.35) !important; /* Ligeramente rosa/cálido para user */
+        background: rgba(20, 10, 30, 0.45) !important;
+        border-right: 2px solid #FF003C !important;
+        border-left: 1px solid rgba(255,255,255,0.05) !important;
         text-align: right;
     }
     
-    @keyframes levitateIn {
-        from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    @keyframes dataDrop {
+        from { opacity: 0; transform: translateY(-20px) scale(0.97); }
         to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
-    /* INPUT DE CHAT - BARRA DE CRISTAL */
+    /* INPUT DE CHAT - CONSOLA CYBERPUNK */
     [data-testid="stChatInput"] {
-        border-radius: 40px !important;
-        background: rgba(255, 255, 255, 0.4) !important;
-        backdrop-filter: blur(30px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
+        border-radius: 12px !important;
+        background: rgba(5, 5, 15, 0.6) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
         
-        border-top: 1px solid rgba(255, 255, 255, 0.9) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border: 1px solid rgba(0, 240, 255, 0.3) !important;
+        border-bottom: 3px solid #7000FF !important;
         
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
-        padding: 0.5rem 1.5rem !important;
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
+        padding: 0.6rem 1.2rem !important;
+        transition: all 0.3s ease !important;
     }
     
     [data-testid="stChatInput"]:focus-within {
-        background: rgba(255, 255, 255, 0.6) !important;
-        box-shadow: 0 20px 40px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.5) !important;
-        transform: translateY(-4px) scale(1.02);
+        background: rgba(10, 10, 25, 0.8) !important;
+        border-color: #00F0FF !important;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1) !important;
     }
     
-    /* Ajuste de Texto */
+    /* Ajuste de Texto para lectura en Sci-Fi */
     .stMarkdown p { 
-        font-size: 1.1rem; 
-        color: #1a1a2e; 
-        line-height: 1.6;
-        text-shadow: 0 1px 2px rgba(255,255,255,0.8); /* Hace legible el texto oscuro sobre cristal */
+        font-size: 1.05rem; 
+        color: #E0E0FF; 
+        line-height: 1.7;
+        font-weight: 300;
     }
     
-    /* Sidebar también en modo Cristal */
+    .stMarkdown strong {
+        color: #00F0FF;
+        font-weight: 700;
+        text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+    }
+    
+    /* Sidebar Terminal de Navegación */
     [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.15) !important;
-        backdrop-filter: blur(25px) !important;
-        -webkit-backdrop-filter: blur(25px) !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.5) !important;
+        background: rgba(5, 5, 15, 0.5) !important;
+        backdrop-filter: blur(30px) !important;
+        -webkit-backdrop-filter: blur(30px) !important;
+        border-right: 1px solid rgba(0, 240, 255, 0.2) !important;
     }
     
 </style>
 """, unsafe_allow_html=True)
 
 # --- Encabezado ---
-st.markdown("<h1>BimBam Buy AI</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>L I Q U I D &nbsp; C R Y S T A L</p>", unsafe_allow_html=True)
+st.markdown("<h1>BIMBAM BUY</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>S I S T E M A &nbsp; N Ú C L E O</p>", unsafe_allow_html=True)
 
 # --- Inicialización del Sistema ---
-@st.cache_resource(show_spinner="Cristalizando núcleo de datos...")
+@st.cache_resource(show_spinner="Activando red neuronal...")
 def inicializar_sistema():
     if not os.path.exists("chroma_db"):
-        st.info("Inicializando núcleo de datos...")
+        st.info("Sincronizando clúster de datos...")
         ejecutar_indexacion()
     return AgenteBimBam()
 
@@ -166,27 +185,27 @@ if "mensajes" not in st.session_state:
     st.session_state.mensajes = [
         {
             "role": "assistant", 
-            "content": "¡Hola! 👋 Bienvenido a la inteligencia operativa de BimBam Buy.\n\nEstoy listo para resolver tus dudas sobre **Envíos, Garantías, Reembolsos, Pagos o el Programa de Afiliados**.\n\n¿En qué te ayudo hoy?",
-            "avatar": "💎"
+            "content": "Conexión establecida. 👋 Bienvenido al núcleo de información de BimBam Buy.\n\nPoseo los datos de **Envíos, Garantías, Reembolsos, Pagos y Programa de Afiliados**.\n\n¿Qué bloque de datos deseas consultar?",
+            "avatar": "🤖"
         }
     ]
 
 # Mostrar los mensajes
 for mensaje in st.session_state.mensajes:
-    avatar = mensaje.get("avatar", "👤" if mensaje["role"] == "user" else "💎")
+    avatar = mensaje.get("avatar", "⚡" if mensaje["role"] == "user" else "🤖")
     with st.chat_message(mensaje["role"], avatar=avatar):
         st.markdown(mensaje["content"])
 
 # --- Entrada de Usuario ---
-pregunta_usuario = st.chat_input("Toca el cristal para escribir...")
+pregunta_usuario = st.chat_input("Inicializar comando...")
 
 if pregunta_usuario:
-    st.session_state.mensajes.append({"role": "user", "content": pregunta_usuario, "avatar": "👤"})
-    with st.chat_message("user", avatar="👤"):
+    st.session_state.mensajes.append({"role": "user", "content": pregunta_usuario, "avatar": "⚡"})
+    with st.chat_message("user", avatar="⚡"):
         st.markdown(pregunta_usuario)
     
-    with st.chat_message("assistant", avatar="💎"):
-        with st.spinner("Sintetizando información..."):
+    with st.chat_message("assistant", avatar="🤖"):
+        with st.spinner("Procesando matriz de datos..."):
             resultado = agente.preguntar(pregunta_usuario)
             respuesta_texto = resultado["respuesta"]
             st.markdown(respuesta_texto)
@@ -194,27 +213,27 @@ if pregunta_usuario:
     st.session_state.mensajes.append({
         "role": "assistant", 
         "content": respuesta_texto,
-        "avatar": "💎"
+        "avatar": "🤖"
     })
 
 # --- Barra Lateral ---
 with st.sidebar:
-    st.markdown("### 🎛️ Centro de Control")
+    st.markdown("### 🎛️ Terminal Principal")
     st.markdown("""
-    Desarrollado con arquitectura **RAG**.
+    Protocolo **RAG** en línea.
     """)
     st.divider()
-    st.markdown("#### 📚 Documentos Base:")
-    st.caption("💎 Tiempos y Costos de Envío")
-    st.caption("💎 Manual de Garantía")
-    st.caption("💎 Reembolsos y Devoluciones")
-    st.caption("💎 Métodos de Pago")
-    st.caption("💎 Programa de Afiliados")
+    st.markdown("#### 💾 Nodos Activos:")
+    st.caption("⚡ Tiempos y Costos de Envío")
+    st.caption("⚡ Manual de Garantía")
+    st.caption("⚡ Reembolsos y Devoluciones")
+    st.caption("⚡ Métodos de Pago")
+    st.caption("⚡ Programa de Afiliados")
     st.divider()
     
-    if st.button("💫 Limpiar Cristal (Reiniciar)", type="primary", use_container_width=True):
+    if st.button("🔌 Purgar Memoria", type="primary", use_container_width=True):
         st.session_state.mensajes = [
-            {"role": "assistant", "content": "Cristal limpio. ¡Comenzamos de nuevo! 💎", "avatar": "💎"}
+            {"role": "assistant", "content": "Memoria purgada. Esperando nuevos comandos. 🤖", "avatar": "🤖"}
         ]
         agente.reiniciar_conversacion()
         st.rerun()
